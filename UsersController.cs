@@ -17,8 +17,10 @@ public class UsersController : ControllerBase
     [HttpPost]
     public IActionResult Post(User user)
     {
-        if (string.IsNullOrEmpty(user.Name) || string.IsNullOrEmpty(user.Email))
-            return BadRequest("Invalid data");
+       if (string.IsNullOrWhiteSpace(user.Name) || string.IsNullOrWhiteSpace(user.Email))
+            {
+                return BadRequest("Name and Email are required");
+            }
 
         users.Add(user);
         return Ok(user);
